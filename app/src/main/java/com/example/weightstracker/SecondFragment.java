@@ -1,4 +1,4 @@
-package com.example.tracker;
+package com.example.weightstracker;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
