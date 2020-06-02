@@ -1,6 +1,7 @@
 package com.example.weightstracker;
 
 import android.os.Bundle;
+import com.example.Exercise;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -39,5 +40,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void saveExercise(Exercise exercise) {
+        System.out.println(exercise.getName());     //button call test
     }
 }

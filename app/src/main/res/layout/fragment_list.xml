@@ -7,26 +7,18 @@
         android:layout_height="match_parent"
         tools:context=".ListFragment">
 
-    <TextView
-        android:id="@+id/textview_list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_list_fragment"
-        app:layout_constraintBottom_toTopOf="@id/button_list"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/exerciseList"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/newExerciseButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-            android:id="@+id/button_list"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/next"
-            app:layout_constraintTop_toBottomOf="@id/textview_list"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-    />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/newExerciseButton"
@@ -38,4 +30,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/ic_input_add" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

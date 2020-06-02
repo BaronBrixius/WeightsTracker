@@ -1,10 +1,9 @@
 package com.example;
 
-import android.os.Parcel;
-
 import java.io.Serializable;
 
 public class Exercise implements Serializable {
+    private int id;                 //not sure if this is needed
     private String name;
     private double weight;          //note: kilograms
     private double increment;
@@ -21,12 +20,6 @@ public class Exercise implements Serializable {
         setName(name);
         setWeight(weight);
         setUnit(increment);
-    }
-
-    protected Exercise(Parcel in) {
-        name = in.readString();
-        weight = in.readDouble();
-        increment = in.readDouble();
     }
 
     public String getName() {
