@@ -1,4 +1,4 @@
-package com.example.tracker;
+package com.example.weightstracker;
 
 import org.junit.Test;
 
