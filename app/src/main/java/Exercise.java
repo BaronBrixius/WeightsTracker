@@ -1,6 +1,6 @@
 public class Exercise {
     private String name;
-    private double weight;
+    private double weight;          //note: kilograms
     private double unit;
 
     public Exercise(String name, double weight){
@@ -11,6 +11,10 @@ public class Exercise {
         setName(name);
         setWeight(weight);
         setUnit(unit);
+    }
+
+    public String getName(){
+        return name;
     }
 
     public String setName(String name){
@@ -25,8 +29,16 @@ public class Exercise {
         return weight -= unit;
     }
 
+    public double getWeight() {
+        return weight;
+    }
+
     public double setWeight(double weight){
         return this.weight = weight;
+    }
+
+    public double getUnit() {
+        return unit;
     }
 
     public double setUnit(double unit) {
