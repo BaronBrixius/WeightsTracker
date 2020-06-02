@@ -3,16 +3,16 @@ package com.example;
 public class Exercise {
     private String name;
     private double weight;          //note: kilograms
-    private double unit;
+    private double increment;
 
     public Exercise(String name, double weight){
         this(name, weight, 5);
     }
 
-    public Exercise(String name, double weight, double unit){
+    public Exercise(String name, double weight, double increment){
         setName(name);
         setWeight(weight);
-        setUnit(unit);
+        setUnit(increment);
     }
 
     public String getName(){
@@ -24,11 +24,11 @@ public class Exercise {
     }
 
     public double increment(){
-        return weight += unit;
+        return weight += increment;
     }
 
     public double decrement(){
-        return weight -= unit;
+        return weight -= increment;
     }
 
     public double getWeight() {
@@ -39,11 +39,11 @@ public class Exercise {
         return this.weight = weight;
     }
 
-    public double getUnit() {
-        return unit;
+    public double getIncrement() {
+        return increment;
     }
 
-    public double setUnit(double unit) {
-        return this.unit = unit;
+    public double setUnit(double increment) {
+        return this.increment = increment;
     }
 }

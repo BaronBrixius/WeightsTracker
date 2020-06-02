@@ -1,6 +1,7 @@
 package com.example.weightstracker;
 
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,5 +24,9 @@ public class SecondFragment extends Fragment {
         String myArg = SecondFragmentArgs.fromBundle(getArguments()).getMyArg();
         TextInputEditText textView = view.findViewById(R.id.nameField);
         textView.setText(myArg);
+    }
+
+    public void saveExercise(View view){
+
     }
 }
