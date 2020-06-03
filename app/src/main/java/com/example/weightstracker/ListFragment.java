@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.Exercise;
@@ -27,12 +26,8 @@ public class ListFragment extends Fragment implements ExerciseListAdapter.ItemCl
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
         RecyclerView exerciseView = view.findViewById(R.id.exerciseList);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        exerciseView.setLayoutManager(layoutManager);
-        DividerItemDecoration divider = new DividerItemDecoration(exerciseView.getContext(), layoutManager.getOrientation());
-        exerciseView.addItemDecoration(divider);
+        exerciseView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         ArrayList<Exercise> exercises = new ArrayList<>();
         exercises.add(new Exercise("Lift", 50, 5));      //TODO replace with actual data
@@ -58,7 +53,7 @@ public class ListFragment extends Fragment implements ExerciseListAdapter.ItemCl
         openExpandedFragment(adapter.getItem(position));
     }
 
-    private void openExpandedFragment(Exercise exercise) {
+    private void openExpandedFragment(Exercise exercise) {      //opens the ExpandedFragment and sends the passed exercise as an argument
         ListFragmentDirections.ActionListFragmentToExpandedFragment action =
                 ListFragmentDirections.
                         actionListFragmentToExpandedFragment(exercise);

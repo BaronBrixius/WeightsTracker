@@ -31,7 +31,8 @@ public class ExerciseListAdapter extends RecyclerView.Adapter<ExerciseListAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ExerciseListAdapter.ViewHolder holder, int position) {
-        holder.textView.setText(data.get(position).getName());
+        holder.exerciseName.setText(data.get(position).getName());
+        holder.weightSpinner.setText(String.valueOf(data.get(position).getWeight()));
     }
 
     @Override
@@ -40,11 +41,13 @@ public class ExerciseListAdapter extends RecyclerView.Adapter<ExerciseListAdapte
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView textView;
+        TextView exerciseName;
+        TextView weightSpinner;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            textView = itemView.findViewById(R.id.exerciseName);
+            exerciseName = itemView.findViewById(R.id.exerciseName);
+            weightSpinner = itemView.findViewById(R.id.weightSpinner);
             itemView.setOnClickListener(this);
         }
 
