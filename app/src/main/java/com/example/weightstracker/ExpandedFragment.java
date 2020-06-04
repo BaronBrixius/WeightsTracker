@@ -8,6 +8,7 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import com.example.Exercise;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 
 public class ExpandedFragment extends Fragment {
@@ -25,11 +26,12 @@ public class ExpandedFragment extends Fragment {
         exercise = ExpandedFragmentArgs.fromBundle(getArguments()).getExercise();
         initializeViews(view);
 
-        view.findViewById(R.id.saveButton).setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton fab = getActivity().findViewById(R.id.newExerciseButton);
+        fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_save, getContext().getTheme()));
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 ((MainActivity) getActivity()).saveExercise(exercise);
-
             }
         });
     }
@@ -39,5 +41,4 @@ public class ExpandedFragment extends Fragment {
         ((EditText) view.findViewById(R.id.weightField)).setText(String.valueOf(exercise.getWeight()));
         ((EditText) view.findViewById(R.id.incrementField)).setText(String.valueOf(exercise.getIncrement()));
     }
-
 }

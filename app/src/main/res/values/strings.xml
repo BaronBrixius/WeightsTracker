@@ -12,4 +12,5 @@
     <string name="increment">increment</string>
     <string name="exercise_name">exercise name</string>
     <string name="save">Save</string>
+    <string name="increment_weight">Increment Weight</string>
 </resources>

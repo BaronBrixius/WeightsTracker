@@ -40,6 +40,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void saveExercise(Exercise exercise) {
-        Toast.makeText(this, exercise.getName() + " saved." , Toast.LENGTH_SHORT).show();     //button call test
+        Toast.makeText(this, exercise.getName() + " saved.", Toast.LENGTH_SHORT).show();     //button call test
     }
 }
