@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onPause() {         //saves data on minimize/close
+    public void onPause() {         //saves data to file on minimize/close
         super.onPause();
         try (FileOutputStream outFile = new FileOutputStream(savedDataFile);
              ObjectOutputStream outList = new ObjectOutputStream(outFile)) {

@@ -12,7 +12,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 
 public class ExpandedFragment extends Fragment {
-    Exercise exercise;
+    private Exercise exercise;
+    private TextInputEditText nameInput;
+    private EditText weightInput;
+    private EditText incrementInput;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -22,23 +25,32 @@ public class ExpandedFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         exercise = ExpandedFragmentArgs.fromBundle(getArguments()).getExercise();
-        initializeViews(view);
+        nameInput = view.findViewById(R.id.nameField);
+        weightInput = view.findViewById(R.id.weightField);
+        incrementInput = view.findViewById(R.id.incrementField);
 
-        FloatingActionButton fab = getActivity().findViewById(R.id.newExerciseButton);
-        fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_save, getContext().getTheme()));
+        populateDisplay();
+
+        final MainActivity activity = (MainActivity) getActivity();
+        if (activity == null)
+            return;
+        FloatingActionButton fab = activity.findViewById(R.id.newExerciseButton);
+        fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_save, activity.getTheme()));
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MainActivity) getActivity()).saveExercise(exercise);
+                exercise.setName(nameInput.getText());
+                exercise.setWeight(weightInput.getText());
+                exercise.setIncrement(incrementInput.getText());
+                activity.saveExercise(exercise);
             }
         });
     }
 
-    private void initializeViews(View view) {
-        ((TextInputEditText) view.findViewById(R.id.nameField)).setText(exercise.getName());
-        ((EditText) view.findViewById(R.id.weightField)).setText(String.valueOf(exercise.getWeight()));
-        ((EditText) view.findViewById(R.id.incrementField)).setText(String.valueOf(exercise.getIncrement()));
+    private void populateDisplay() {
+        nameInput.setText(exercise.getName());
+        weightInput.setText(String.valueOf(exercise.getWeight()));
+        incrementInput.setText(String.valueOf(exercise.getIncrement()));
     }
 }

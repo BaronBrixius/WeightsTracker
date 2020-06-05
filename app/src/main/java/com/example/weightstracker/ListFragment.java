@@ -27,7 +27,7 @@ public class ListFragment extends Fragment implements ExerciseListAdapter.ItemCl
         RecyclerView exerciseView = view.findViewById(R.id.exerciseList);
         exerciseView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        MainActivity activity = (MainActivity) getActivity();
+        final MainActivity activity = (MainActivity) getActivity();
         if (activity == null)
             return;
         adapter = new ExerciseListAdapter(getActivity(), activity.exerciseList);

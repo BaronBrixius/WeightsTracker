@@ -14,12 +14,14 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:hint="@string/exercise_name"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.32999998" />
+        app:layout_constraintVertical_bias="0.33" />
 
     <EditText
         android:id="@+id/weightField"
@@ -33,6 +35,8 @@
         android:hint="@string/weight"
         android:importantForAutofill="no"
         android:inputType="numberDecimal"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
         android:textAlignment="center"
         app:layout_constraintEnd_toStartOf="@+id/incrementField"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,6 +54,8 @@
         android:hint="@string/increment"
         android:importantForAutofill="no"
         android:inputType="numberDecimal"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/weightField"
