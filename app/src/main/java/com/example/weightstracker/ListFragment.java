@@ -12,8 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.Exercise;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
-
 public class ListFragment extends Fragment implements ExerciseListAdapter.ItemClickListener {
     ExerciseListAdapter adapter;
 
@@ -29,21 +27,14 @@ public class ListFragment extends Fragment implements ExerciseListAdapter.ItemCl
         RecyclerView exerciseView = view.findViewById(R.id.exerciseList);
         exerciseView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        ArrayList<Exercise> exercises = new ArrayList<>();
-        exercises.add(new Exercise("Lift", 50, 5));      //TODO replace with actual data
-        exercises.add(new Exercise("Push", 70, 10));
-        exercises.add(new Exercise("Pull", 60, 5));
-        exercises.add(new Exercise("Curl", 12, 2));
-        exercises.add(new Exercise("Bop It", 25, 2.5));
-        exercises.add(new Exercise("Twist It", 50, 5));
-        exercises.add(new Exercise("Flick It", 100, 10));
-
-        adapter = new ExerciseListAdapter(getActivity(), exercises);
+        MainActivity activity = (MainActivity) getActivity();
+        if (activity == null)
+            return;
+        adapter = new ExerciseListAdapter(getActivity(), activity.exerciseList);
         adapter.setClickListener(this);
         exerciseView.setAdapter(adapter);
-
         FloatingActionButton fab = getActivity().findViewById(R.id.newExerciseButton);
-        fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_add, getContext().getTheme()));
+        fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_add, activity.getTheme()));
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

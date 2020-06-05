@@ -8,7 +8,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import com.example.Exercise;
 
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
+    List<Exercise> exerciseList;
+    File savedDataFile;
+
+    @SuppressWarnings("unchecked")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -16,6 +24,19 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        savedDataFile = new File(getFilesDir(), "ExerciseList");
+
+        try (FileInputStream inFile = new FileInputStream(savedDataFile);
+             ObjectInputStream inList = new ObjectInputStream(inFile)) {
+            exerciseList = (List<Exercise>) inList.readObject();
+
+            if (exerciseList == null)           //readObject returns null if file is empty, make a new List in that case
+                exerciseList = new ArrayList<>();
+        } catch (IOException | ClassNotFoundException e) {
+            exerciseList = new ArrayList<>();
+            Toast.makeText(this, "Error: Could not load data.", Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
@@ -40,6 +61,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void saveExercise(Exercise exercise) {
-        Toast.makeText(this, exercise.getName() + " saved.", Toast.LENGTH_SHORT).show();     //button call test
+        exerciseList.add(exercise);     //TODO make this only update if exercise already exists
+    }
+
+    @Override
+    public void onPause() {         //saves data on minimize/close
+        super.onPause();
+        try (FileOutputStream outFile = new FileOutputStream(savedDataFile);
+             ObjectOutputStream outList = new ObjectOutputStream(outFile)) {
+            outList.writeObject(exerciseList);
+        } catch (IOException e) {
+            Toast.makeText(this, "Error: Could not save.", Toast.LENGTH_LONG).show();
+        }
     }
 }
