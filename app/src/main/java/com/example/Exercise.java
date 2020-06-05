@@ -55,4 +55,11 @@ public class Exercise implements Serializable {
     public double increment() {
         return weight += increment;
     }
+
+    @Override
+    public boolean equals(Object other){
+        if (!(other instanceof Exercise))
+            return false;
+        return this.id == ((Exercise) other).id;
+    }
 }

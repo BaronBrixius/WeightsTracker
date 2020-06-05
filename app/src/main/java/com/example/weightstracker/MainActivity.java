@@ -60,18 +60,34 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void saveExercise(Exercise exercise) {
-        exerciseList.add(exercise);     //TODO make this only update if exercise already exists
+    public void saveExercise(Exercise savedExercise) {
+        if (savedExercise.getID() == 0) {                   //if new exercise, give it an ID and save it
+            savedExercise.setID(exerciseList.size());
+            exerciseList.add(savedExercise);
+            return;
+        }
+
+        for (int i = 0; i < exerciseList.size(); i++) {     //otherwise, find matching exercise and update it
+            if (savedExercise.equals(exerciseList.get(i))) {
+                exerciseList.set(i, savedExercise);
+                return;
+            }
+        }
     }
 
     @Override
     public void onPause() {         //saves data to file on minimize/close
         super.onPause();
+
+        for (int i = 0; i < exerciseList.size(); i++) {     //streamline exercise IDs before saving in case of deletions
+            exerciseList.get(i).setID(i);
+        }
+
         try (FileOutputStream outFile = new FileOutputStream(savedDataFile);
              ObjectOutputStream outList = new ObjectOutputStream(outFile)) {
             outList.writeObject(exerciseList);
         } catch (IOException e) {
-            Toast.makeText(this, "Error: Could not save.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Error: Could not save data.", Toast.LENGTH_LONG).show();
         }
     }
 }
