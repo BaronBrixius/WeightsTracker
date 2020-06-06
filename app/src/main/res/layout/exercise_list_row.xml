@@ -18,7 +18,7 @@
 
         <TextView
             android:id="@+id/exerciseName"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:ellipsize="end"
@@ -38,15 +38,14 @@
             android:textSize="32sp" />
 
         <ImageButton
-            android:id="@+id/imageButton"
+            android:id="@+id/incrementButton"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="1dp"
-            android:layout_weight="0"
             android:background="@drawable/ic_add"
-            android:backgroundTint="#000000"
+            android:backgroundTint="@color/colorAccent"
+            android:longClickable="true"
             android:contentDescription="@string/increment_weight" />
 
     </LinearLayout>

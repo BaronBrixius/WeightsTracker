@@ -2,24 +2,26 @@ package com.example.weightstracker;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.Exercise;
 
 import java.util.List;
 
 public class ExerciseListAdapter extends RecyclerView.Adapter<ExerciseListAdapter.ViewHolder> {
 
-    private List<Exercise> data;
-    private LayoutInflater inflater;
-    private ItemClickListener clickListener;
+    private final List<Exercise> data;
+    private final LayoutInflater inflater;
+    private final ItemClickListener clickListener;
 
-    ExerciseListAdapter(Context context, List<Exercise> data) {
+    ExerciseListAdapter(Context context, List<Exercise> data, ItemClickListener itemClickListener) {
         this.inflater = LayoutInflater.from(context);
         this.data = data;
+        this.clickListener = itemClickListener;
     }
 
     @NonNull
@@ -30,9 +32,18 @@ public class ExerciseListAdapter extends RecyclerView.Adapter<ExerciseListAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ExerciseListAdapter.ViewHolder holder, int position) {
-        holder.exerciseName.setText(data.get(position).getName());
-        holder.weightSpinner.setText(String.valueOf(data.get(position).getWeight()));
+    public void onBindViewHolder(@NonNull ExerciseListAdapter.ViewHolder holder, final int position) {
+        final Exercise thisExercise = data.get(position);
+        holder.exerciseName.setText(thisExercise.getName());
+        holder.weightSpinner.setText(String.valueOf(thisExercise.getWeight()));
+        holder.incrementButton.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                thisExercise.increment();
+                notifyItemChanged(position);
+                return true;
+            }
+        });
     }
 
     @Override
@@ -43,11 +54,13 @@ public class ExerciseListAdapter extends RecyclerView.Adapter<ExerciseListAdapte
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView exerciseName;
         TextView weightSpinner;
+        ImageButton incrementButton;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             exerciseName = itemView.findViewById(R.id.exerciseName);
             weightSpinner = itemView.findViewById(R.id.weightSpinner);
+            incrementButton = itemView.findViewById(R.id.incrementButton);
             itemView.setOnClickListener(this);
         }
 
@@ -60,10 +73,6 @@ public class ExerciseListAdapter extends RecyclerView.Adapter<ExerciseListAdapte
 
     Exercise getItem(int id) {
         return data.get(id);
-    }
-
-    void setClickListener(ItemClickListener itemClickListener) {
-        this.clickListener = itemClickListener;
     }
 
     public interface ItemClickListener {

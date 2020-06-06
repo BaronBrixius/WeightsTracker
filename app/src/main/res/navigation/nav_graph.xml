@@ -23,7 +23,7 @@
 
         <argument
             android:name="exercise"
-            app:argType="com.example.Exercise" />
+            app:argType="com.example.weightstracker.Exercise" />
 
     </fragment>
 </navigation>

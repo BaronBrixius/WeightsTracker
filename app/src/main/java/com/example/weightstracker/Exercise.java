@@ -1,4 +1,4 @@
-package com.example;
+package com.example.weightstracker;
 
 import android.text.Editable;
 
@@ -8,17 +8,7 @@ public class Exercise implements Serializable {
     private int id;
     private String name;
     private double weight;          //note: kilograms
-    private double increment;
-
-    public Exercise() {
-    }
-
-    public Exercise(int id, Editable name, Editable weight, Editable increment) {
-        setID(id);
-        setName(name);
-        setWeight(weight);
-        setIncrement(increment);
-    }
+    private double increment;       //minimum weight increase (e.g. smallest plate you can add is 2.5kg)
 
     public int getID() {
         return id;

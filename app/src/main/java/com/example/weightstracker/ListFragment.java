@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.Exercise;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class ListFragment extends Fragment implements ExerciseListAdapter.ItemClickListener {
@@ -30,8 +29,7 @@ public class ListFragment extends Fragment implements ExerciseListAdapter.ItemCl
         final MainActivity activity = (MainActivity) getActivity();
         if (activity == null)
             return;
-        adapter = new ExerciseListAdapter(getActivity(), activity.exerciseList);
-        adapter.setClickListener(this);
+        adapter = new ExerciseListAdapter(getActivity(), activity.exerciseList, this);
         exerciseView.setAdapter(adapter);
         FloatingActionButton fab = getActivity().findViewById(R.id.newExerciseButton);
         fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_add, activity.getTheme()));

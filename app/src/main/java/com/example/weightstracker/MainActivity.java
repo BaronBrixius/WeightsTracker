@@ -3,10 +3,10 @@ package com.example.weightstracker;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import com.example.Exercise;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -14,7 +14,6 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     List<Exercise> exerciseList;
-    File savedDataFile;
 
     @SuppressWarnings("unchecked")
     @Override
@@ -25,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        savedDataFile = new File(getFilesDir(), "ExerciseList");
+        File savedDataFile = new File(getFilesDir(), "ExerciseList");
 
         try (FileInputStream inFile = new FileInputStream(savedDataFile);
              ObjectInputStream inList = new ObjectInputStream(inFile)) {
@@ -35,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
                 exerciseList = new ArrayList<>();
         } catch (IOException | ClassNotFoundException e) {
             exerciseList = new ArrayList<>();
-            Toast.makeText(this, "Error: Could not load data.", Toast.LENGTH_LONG).show();
+            e.printStackTrace();Toast.makeText(this, "Error: Could not load data.", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -79,10 +78,11 @@ public class MainActivity extends AppCompatActivity {
     public void onPause() {         //saves data to file on minimize/close
         super.onPause();
 
-        for (int i = 0; i < exerciseList.size(); i++) {     //streamline exercise IDs before saving in case of deletions
+        for (int i = 0; i < exerciseList.size(); i++) {     //streamline exercise IDs before saving
             exerciseList.get(i).setID(i);
         }
 
+        File savedDataFile = new File(getFilesDir(), "ExerciseList");
         try (FileOutputStream outFile = new FileOutputStream(savedDataFile);
              ObjectOutputStream outList = new ObjectOutputStream(outFile)) {
             outList.writeObject(exerciseList);
