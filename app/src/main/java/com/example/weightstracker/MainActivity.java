@@ -3,7 +3,6 @@ package com.example.weightstracker;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -25,16 +24,15 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         File savedDataFile = new File(getFilesDir(), "ExerciseList");
-
-        try (FileInputStream inFile = new FileInputStream(savedDataFile);
-             ObjectInputStream inList = new ObjectInputStream(inFile)) {
-            exerciseList = (List<Exercise>) inList.readObject();
-
-            if (exerciseList == null)           //readObject returns null if file is empty, make a new List in that case
-                exerciseList = new ArrayList<>();
+            try (FileInputStream inFile = new FileInputStream(savedDataFile);
+                 ObjectInputStream inList = new ObjectInputStream(inFile)) {
+                exerciseList = (List<Exercise>) inList.readObject();
         } catch (IOException | ClassNotFoundException e) {
-            exerciseList = new ArrayList<>();
-            e.printStackTrace();Toast.makeText(this, "Error: Could not load data.", Toast.LENGTH_LONG).show();
+            e.printStackTrace();
+            Toast.makeText(this, "Error: Could not load data.", Toast.LENGTH_LONG).show();
+        } finally {
+            if (exerciseList == null)           //readObject returns null if file is empty
+                exerciseList = new ArrayList<>();
         }
     }
 
@@ -60,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void saveExercise(Exercise savedExercise) {
-        if (savedExercise.getID() == 0) {                   //if new exercise, give it an ID and save it
+        if (savedExercise.getID() == -1) {                   //if new exercise, give it an ID and save it
             savedExercise.setID(exerciseList.size());
             exerciseList.add(savedExercise);
             return;

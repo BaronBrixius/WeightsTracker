@@ -1,11 +1,9 @@
 package com.example.weightstracker;
 
-import android.text.Editable;
-
 import java.io.Serializable;
 
 public class Exercise implements Serializable {
-    private int id;
+    private int id = -1;
     private String name;
     private double weight;          //note: kilograms
     private double increment;       //minimum weight increase (e.g. smallest plate you can add is 2.5kg)
@@ -22,28 +20,28 @@ public class Exercise implements Serializable {
         return name;
     }
 
-    public void setName(Editable name) {
-        this.name = name.toString();
+    public void setName(String name) {
+        this.name = name;
     }
 
     public double getWeight() {
         return weight;
     }
 
-    public void setWeight(Editable weight) {
-        this.weight = Double.parseDouble(weight.toString());
+    public void setWeight(double weight) {
+        this.weight = weight;
     }
 
     public double getIncrement() {
         return increment;
     }
 
-    public void setIncrement(Editable increment) {
-        this.increment = Double.parseDouble(increment.toString());
+    public void setIncrement(double increment) {
+        this.increment = increment;
     }
 
-    public double increment() {
-        return weight += increment;
+    public void increment() {
+        weight += increment;
     }
 
     @Override
