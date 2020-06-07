@@ -3,12 +3,14 @@ package com.example.weightstracker;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -21,8 +23,7 @@ public class ExpandedFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_expanded, container, false);
+        return inflater.inflate(R.layout.fragment_expanded, container, false);        // Inflate the layout for this fragment
     }
 
     @Override
@@ -44,7 +45,19 @@ public class ExpandedFragment extends Fragment {
 
         populateDisplay();
 
-        FloatingActionButton fab = activity.findViewById(R.id.newExerciseButton);
+        BottomAppBar bottomAppBar = activity.findViewById(R.id.bottomAppBar);
+        bottomAppBar.replaceMenu(R.menu.bottomappbar_expanded_menu);
+
+        activity.findViewById(R.id.deleteExerciseButton).setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                activity.deleteExercise(exercise);
+                activity.onBackPressed();
+                return true;
+            }
+        });
+
+        FloatingActionButton fab = activity.findViewById(R.id.fab);
         fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_save, activity.getTheme()));
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,7 +71,7 @@ public class ExpandedFragment extends Fragment {
         });
     }
 
-    private boolean updateItem() {
+    private boolean updateItem() {              //validates data and sets Exercise's values, returns true if successful
         if (nameInput.getText() == null)
             return false;
         String name = nameInput.getText().toString().trim();
@@ -76,8 +89,8 @@ public class ExpandedFragment extends Fragment {
         return true;
     }
 
-    private void populateDisplay() {
-        if (exercise.getID() == -1)      //new Exercise, don't populate anything
+    private void populateDisplay() {        //fills in fields with Exercise's values
+        if (exercise.getID() == -1)         //new Exercise, don't populate anything
             return;
         nameInput.setText(exercise.getName());
         weightInput.setText(String.valueOf(exercise.getWeight()));

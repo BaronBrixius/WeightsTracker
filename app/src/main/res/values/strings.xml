@@ -13,4 +13,5 @@
     <string name="exercise_name">exercise name</string>
     <string name="save">Save</string>
     <string name="increment_weight">Increment Weight</string>
+    <string name="delete_exercise">Delete Exercise</string>
 </resources>

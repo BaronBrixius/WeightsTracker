@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class ListFragment extends Fragment implements ExerciseListAdapter.ItemClickListener {
@@ -16,8 +17,7 @@ public class ListFragment extends Fragment implements ExerciseListAdapter.ItemCl
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_list, container, false);
+        return inflater.inflate(R.layout.fragment_list, container, false);  // Inflate the layout for this fragment
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
@@ -31,7 +31,10 @@ public class ListFragment extends Fragment implements ExerciseListAdapter.ItemCl
             return;
         adapter = new ExerciseListAdapter(getActivity(), activity.exerciseList, this);
         exerciseView.setAdapter(adapter);
-        FloatingActionButton fab = getActivity().findViewById(R.id.newExerciseButton);
+
+        BottomAppBar bottomAppBar = getActivity().findViewById(R.id.bottomAppBar);
+
+        FloatingActionButton fab = getActivity().findViewById(R.id.fab);
         fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_add, activity.getTheme()));
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,8 +51,7 @@ public class ListFragment extends Fragment implements ExerciseListAdapter.ItemCl
 
     private void openExpandedFragment(Exercise exercise) {      //opens the ExpandedFragment and sends the passed exercise as an argument
         ListFragmentDirections.ActionListFragmentToExpandedFragment action =
-                ListFragmentDirections.
-                        actionListFragmentToExpandedFragment(exercise);
+                ListFragmentDirections.actionListFragmentToExpandedFragment(exercise);
         NavHostFragment.findNavController(ListFragment.this).navigate(action);
     }
 }

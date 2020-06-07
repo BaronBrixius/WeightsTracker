@@ -24,9 +24,9 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         File savedDataFile = new File(getFilesDir(), "ExerciseList");
-            try (FileInputStream inFile = new FileInputStream(savedDataFile);
-                 ObjectInputStream inList = new ObjectInputStream(inFile)) {
-                exerciseList = (List<Exercise>) inList.readObject();
+        try (FileInputStream inFile = new FileInputStream(savedDataFile);
+             ObjectInputStream inList = new ObjectInputStream(inFile)) {
+            exerciseList = (List<Exercise>) inList.readObject();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
             Toast.makeText(this, "Error: Could not load data.", Toast.LENGTH_LONG).show();
@@ -57,19 +57,25 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void saveExercise(Exercise savedExercise) {
-        if (savedExercise.getID() == -1) {                   //if new exercise, give it an ID and save it
-            savedExercise.setID(exerciseList.size());
-            exerciseList.add(savedExercise);
+    void saveExercise(Exercise exerciseToSave) {
+        if (exerciseToSave.getID() == -1) {                 //if new exercise, give it an ID and save it
+            exerciseToSave.setID(exerciseList.size());
+            exerciseList.add(exerciseToSave);
             return;
         }
 
         for (int i = 0; i < exerciseList.size(); i++) {     //otherwise, find matching exercise and update it
-            if (savedExercise.equals(exerciseList.get(i))) {
-                exerciseList.set(i, savedExercise);
+            if (exerciseToSave.equals(exerciseList.get(i))) {
+                exerciseList.set(i, exerciseToSave);
                 return;
             }
         }
+    }
+
+    boolean deleteExercise(Exercise exerciseToDelete) {
+        if (exerciseToDelete.getID() == -1)                 //no need to iterate through List if exercise hasn't been saved
+            return false;
+        return exerciseList.remove(exerciseToDelete);
     }
 
     @Override
