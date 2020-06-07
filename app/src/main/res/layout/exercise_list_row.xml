@@ -42,11 +42,11 @@
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_gravity="center"
-            android:layout_marginTop="2dp"
+            android:layout_marginStart="5dp"
             android:backgroundTint="#E8E8E8"
             android:contentDescription="@string/increment_weight"
             android:longClickable="true"
-            android:src="@drawable/ic_add"
+            android:src="@drawable/ic_increment"
             android:tint="@color/colorAccent" />
 
     </LinearLayout>
