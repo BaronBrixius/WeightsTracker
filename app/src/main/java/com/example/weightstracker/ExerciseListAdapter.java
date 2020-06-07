@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,6 +36,12 @@ public class ExerciseListAdapter extends RecyclerView.Adapter<ExerciseListAdapte
         final Exercise thisExercise = data.get(position);
         holder.exerciseName.setText(thisExercise.getName());
         holder.weightSpinner.setText(String.valueOf(thisExercise.getWeight()));
+        holder.incrementButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(), "Hold to increment weight.", Toast.LENGTH_SHORT).show();
+            }
+        });
         holder.incrementButton.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -51,9 +58,9 @@ public class ExerciseListAdapter extends RecyclerView.Adapter<ExerciseListAdapte
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView exerciseName;
-        TextView weightSpinner;
-        ImageButton incrementButton;
+        final TextView exerciseName;
+        final TextView weightSpinner;
+        final ImageButton incrementButton;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -66,7 +73,7 @@ public class ExerciseListAdapter extends RecyclerView.Adapter<ExerciseListAdapte
         @Override
         public void onClick(View view) {
             if (clickListener != null)
-                clickListener.onItemClick(view, getAdapterPosition());
+                clickListener.onItemClick(getAdapterPosition());
         }
     }
 
@@ -75,6 +82,6 @@ public class ExerciseListAdapter extends RecyclerView.Adapter<ExerciseListAdapte
     }
 
     public interface ItemClickListener {
-        void onItemClick(View view, int position);
+        void onItemClick(int position);
     }
 }

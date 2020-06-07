@@ -33,6 +33,7 @@ public class ListFragment extends Fragment implements ExerciseListAdapter.ItemCl
         exerciseView.setAdapter(adapter);
 
         BottomAppBar bottomAppBar = getActivity().findViewById(R.id.bottomAppBar);
+        bottomAppBar.getMenu().clear();
 
         FloatingActionButton fab = getActivity().findViewById(R.id.fab);
         fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_add, activity.getTheme()));
@@ -45,7 +46,7 @@ public class ListFragment extends Fragment implements ExerciseListAdapter.ItemCl
     }
 
     @Override
-    public void onItemClick(View view, int position) {
+    public void onItemClick(int position) {
         openExpandedFragment(adapter.getItem(position));
     }
 

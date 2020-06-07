@@ -3,7 +3,6 @@ package com.example.weightstracker;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -27,7 +26,7 @@ public class ExpandedFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(@NonNull Context context){
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         if (context instanceof MainActivity)
             activity = (MainActivity) context;
@@ -48,10 +47,18 @@ public class ExpandedFragment extends Fragment {
         BottomAppBar bottomAppBar = activity.findViewById(R.id.bottomAppBar);
         bottomAppBar.replaceMenu(R.menu.bottomappbar_expanded_menu);
 
-        activity.findViewById(R.id.deleteExerciseButton).setOnLongClickListener(new View.OnLongClickListener() {
+        View deleteExerciseButton = activity.findViewById(R.id.deleteExerciseButton);
+        deleteExerciseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(activity, "Hold to delete exercise.", Toast.LENGTH_SHORT).show();
+            }
+        });
+        deleteExerciseButton.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                activity.deleteExercise(exercise);
+                if (activity.deleteExercise(exercise))
+                    Toast.makeText(activity, exercise.getName() + " deleted", Toast.LENGTH_SHORT).show();
                 activity.onBackPressed();
                 return true;
             }
