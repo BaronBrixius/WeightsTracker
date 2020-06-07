@@ -16,9 +16,10 @@ import com.google.android.material.textfield.TextInputEditText;
 public class ExpandedFragment extends Fragment {
     private MainActivity activity;
     private Exercise exercise;
-    private TextInputEditText nameInput;
-    private EditText weightInput;
-    private EditText incrementInput;
+    private TextInputEditText nameField;
+    private EditText weightField;
+    private EditText incrementField;
+    private TextInputEditText noteField;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -36,18 +37,22 @@ public class ExpandedFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        //get current exercise
         if (getArguments() == null)
             return;
         exercise = ExpandedFragmentArgs.fromBundle(getArguments()).getExercise();
-        nameInput = view.findViewById(R.id.nameField);
-        weightInput = view.findViewById(R.id.weightField);
-        incrementInput = view.findViewById(R.id.incrementField);
 
+        //identify input fields
+        nameField = view.findViewById(R.id.nameField);
+        weightField = view.findViewById(R.id.weightField);
+        incrementField = view.findViewById(R.id.incrementField);
+        noteField = view.findViewById(R.id.noteField);
         populateDisplay();
 
         BottomAppBar bottomAppBar = activity.findViewById(R.id.bottomAppBar);
         bottomAppBar.replaceMenu(R.menu.bottomappbar_expanded_menu);
 
+        //make delete button
         View deleteExerciseButton = activity.findViewById(R.id.deleteExerciseButton);
         deleteExerciseButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,6 +70,7 @@ public class ExpandedFragment extends Fragment {
             }
         });
 
+        //make save button
         FloatingActionButton fab = activity.findViewById(R.id.fab);
         fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_save, activity.getTheme()));
         fab.setOnClickListener(new View.OnClickListener() {
@@ -72,7 +78,6 @@ public class ExpandedFragment extends Fragment {
             public void onClick(View view) {
                 if (!updateItem())
                     return;
-
                 activity.saveExercise(exercise);
                 Toast.makeText(activity, exercise.getName() + " saved.", Toast.LENGTH_SHORT).show();
             }
@@ -82,26 +87,29 @@ public class ExpandedFragment extends Fragment {
     private void populateDisplay() {        //fills in fields with Exercise's values
         if (exercise.getID() == -1)         //new Exercise, don't populate anything
             return;
-        nameInput.setText(exercise.getName());
-        weightInput.setText(String.valueOf(exercise.getWeight()));
-        incrementInput.setText(String.valueOf(exercise.getIncrement()));
+        nameField.setText(exercise.getName());
+        weightField.setText(String.valueOf(exercise.getWeight()));
+        incrementField.setText(String.valueOf(exercise.getIncrement()));
+        noteField.setText(exercise.getNote());
     }
 
     private boolean updateItem() {              //validates data and sets Exercise's values, returns true if successful
-        if (nameInput.getText() == null)
+        if (nameField.getText() == null || noteField.getText() == null)
             return false;
-        String name = nameInput.getText().toString().trim();
-        String weight = weightInput.getText().toString().trim();
-        String increment = incrementInput.getText().toString().trim();
+        String name = nameField.getText().toString().trim();
+        String weight = weightField.getText().toString().trim();
+        String increment = incrementField.getText().toString().trim();
+        String note = noteField.getText().toString().trim();
 
         if (name.isEmpty() || weight.isEmpty() || increment.isEmpty()) {
-            Toast.makeText(activity, "Save Failed: All fields must be filled in.", Toast.LENGTH_LONG).show();
+            Toast.makeText(activity, "Failed to Save: name, weight, and increment must be filled in.", Toast.LENGTH_LONG).show();
             return false;
         }
 
         exercise.setName(name);
         exercise.setWeight(Double.parseDouble(weight));
         exercise.setIncrement(Double.parseDouble(increment));
+        exercise.setNotes(note);
         return true;
     }
 }

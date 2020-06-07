@@ -7,6 +7,7 @@ public class Exercise implements Serializable {
     private String name;
     private double weight;          //note: kilograms
     private double increment;       //minimum weight increase (e.g. smallest plate you can add is 2.5kg)
+    private String note;
 
     public int getID() {
         return id;
@@ -42,6 +43,14 @@ public class Exercise implements Serializable {
 
     public void increment() {
         weight += increment;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNotes(String note) {
+        this.note = note;
     }
 
     @Override

@@ -8,9 +8,10 @@
     <string name="previous">Previous</string>
 
     <string name="hello_list_fragment">Hello list fragment</string>
+    <string name="exercise_name">exercise name</string>
     <string name="weight">weight</string>
     <string name="increment">increment</string>
-    <string name="exercise_name">exercise name</string>
+    <string name="notes">notes</string>
     <string name="save">Save</string>
     <string name="increment_weight">Increment Weight</string>
     <string name="delete_exercise">Delete Exercise</string>
