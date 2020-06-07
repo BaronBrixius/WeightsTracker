@@ -17,9 +17,10 @@ public class ListFragment extends Fragment implements ExerciseListAdapter.ItemCl
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_list, container, false);  // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_list, container, false);
     }
 
+    @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 

@@ -24,14 +24,13 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         File savedDataFile = new File(getFilesDir(), "ExerciseList");
-        try (FileInputStream inFile = new FileInputStream(savedDataFile);
+        try (FileInputStream inFile = new FileInputStream(savedDataFile);   //reads saved Exercises to a List
              ObjectInputStream inList = new ObjectInputStream(inFile)) {
             exerciseList = (List<Exercise>) inList.readObject();
         } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
             Toast.makeText(this, "Error: Could not load data.", Toast.LENGTH_LONG).show();
         } finally {
-            if (exerciseList == null)           //readObject returns null if file is empty
+            if (exerciseList == null)           //note that readObject returns null if file is empty
                 exerciseList = new ArrayList<>();
         }
     }

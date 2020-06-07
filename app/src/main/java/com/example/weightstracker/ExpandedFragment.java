@@ -22,7 +22,7 @@ public class ExpandedFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_expanded, container, false);        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_expanded, container, false);
     }
 
     @Override
@@ -32,6 +32,7 @@ public class ExpandedFragment extends Fragment {
             activity = (MainActivity) context;
     }
 
+    @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
@@ -78,6 +79,14 @@ public class ExpandedFragment extends Fragment {
         });
     }
 
+    private void populateDisplay() {        //fills in fields with Exercise's values
+        if (exercise.getID() == -1)         //new Exercise, don't populate anything
+            return;
+        nameInput.setText(exercise.getName());
+        weightInput.setText(String.valueOf(exercise.getWeight()));
+        incrementInput.setText(String.valueOf(exercise.getIncrement()));
+    }
+
     private boolean updateItem() {              //validates data and sets Exercise's values, returns true if successful
         if (nameInput.getText() == null)
             return false;
@@ -94,13 +103,5 @@ public class ExpandedFragment extends Fragment {
         exercise.setWeight(Double.parseDouble(weight));
         exercise.setIncrement(Double.parseDouble(increment));
         return true;
-    }
-
-    private void populateDisplay() {        //fills in fields with Exercise's values
-        if (exercise.getID() == -1)         //new Exercise, don't populate anything
-            return;
-        nameInput.setText(exercise.getName());
-        weightInput.setText(String.valueOf(exercise.getWeight()));
-        incrementInput.setText(String.valueOf(exercise.getIncrement()));
     }
 }

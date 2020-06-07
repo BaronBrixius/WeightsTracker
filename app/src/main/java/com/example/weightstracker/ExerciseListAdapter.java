@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class ExerciseListAdapter extends RecyclerView.Adapter<ExerciseListAdapter.ViewHolder> {
-
     private final List<Exercise> data;
     private final LayoutInflater inflater;
     private final ItemClickListener clickListener;
