@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">WeightsTracker</string>
+    <string name="app_name">Weights Tracker</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
     <string name="list_fragment_label">List Fragment</string>

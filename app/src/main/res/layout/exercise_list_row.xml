@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="65dp"
+    android:layout_height="50dp"
     android:layout_margin="6dp"
     android:orientation="horizontal"
     android:padding="8dp"
@@ -24,8 +24,7 @@
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:maxLines="1"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="32sp" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <TextView
             android:id="@+id/weightSpinner"
@@ -34,13 +33,12 @@
             android:autofillHints="Weight"
             android:contentDescription="@string/weight"
             android:gravity="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="32sp" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <ImageButton
             android:id="@+id/incrementButton"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
             android:layout_gravity="center"
             android:layout_marginStart="5dp"
             android:backgroundTint="#E8E8E8"
