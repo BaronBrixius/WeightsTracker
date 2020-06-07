@@ -1,8 +1,6 @@
 package com.example.weightstracker;
 
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -20,11 +18,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //toolbar ended up barely used, but it frames the app nicely and having the name up there is neat
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //read saved Exercises to a List
         File savedDataFile = new File(getFilesDir(), "ExerciseList");
-        try (FileInputStream inFile = new FileInputStream(savedDataFile);   //reads saved Exercises to a List
+        try (FileInputStream inFile = new FileInputStream(savedDataFile);
              ObjectInputStream inList = new ObjectInputStream(inFile)) {
             exerciseList = (List<Exercise>) inList.readObject();
         } catch (IOException | ClassNotFoundException e) {
@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
                 exerciseList = new ArrayList<>();
         }
     }
-
 
     void saveExercise(Exercise exerciseToSave) {
         if (exerciseToSave.getID() == -1) {                 //if new exercise, give it an ID and save it

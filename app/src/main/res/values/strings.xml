@@ -1,13 +1,8 @@
 <resources>
     <string name="app_name">Weights Tracker</string>
-    <string name="action_settings">Settings</string>
-    <!-- Strings used for fragments for navigation -->
     <string name="list_fragment_label">List Fragment</string>
     <string name="expanded_fragment_label">Expanded Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
 
-    <string name="hello_list_fragment">Hello list fragment</string>
     <string name="exercise_name">exercise name</string>
     <string name="weight">weight</string>
     <string name="increment">increment</string>
